@@ -20,8 +20,8 @@ module.exports = {
         snappWhite:"#a3a3a3"
       },
       backgroundImage:{
-        'snappGuy':"url('/Assets/imgs/Pictures/mainTopImg.jpg')",
-        'superApp':"url('/Assets/imgs/Pictures/superapp.jpg')",
+        'snappGuy':"url('./Assets/imgs/Pictures/mainTopImg.jpg')",
+        'superApp':"url('./Assets/imgs/Pictures/superapp.jpg')",
       },
     },
   },
