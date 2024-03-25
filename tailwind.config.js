@@ -19,10 +19,10 @@ module.exports = {
         snappGray:"#f2f5f8",
         snappWhite:"#a3a3a3"
       },
-      backgroundImage:{
-        'snappGuy':"url('Assets/imgs/Pictures/mainTopImg.jpg')",
-        'superApp':"url('Assets/imgs/Pictures/superapp.jpg')",
-      },
+      //backgroundImage:{
+        //'snappGuy':"url('Assets/imgs/Pictures/mainTopImg.jpg')",
+        //'superApp':"url('Assets/imgs/Pictures/superapp.jpg')",
+      //},
     },
   },
   plugins: [],
