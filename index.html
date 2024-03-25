@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snapp</title>
+  <link rel="stylesheet" href="./Assets/css/output.css" />
+  <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+  />
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="//unpkg.com/alpinejs" defer></script> 
+  <link rel="shortcut icon" href="Assets/imgs/Icons-Logos/websiteIcon.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="Assets/imgs/Icons-Logos/websiteIcon.png">
+</head>
+
+<body dir="rtl" class="select-none ">
+  <div x-data="dropdown" class="relative z-40">
+    <!-- header -->
+    <header class="z-40 bg-white">
+      <div
+        class="relative flex flex-row-reverse items-center justify-between w-full h-16 px-4 lg:h-24 lg:container lg:justify-start lg:flex-row lg:px-16 gap-x-6">
+        <img src="./Assets/imgs/Icons-Logos/snappTextLogo.svg" alt="snappTextLogo" />
+
+        <div @click="toggle" class=" lg:hidden">
+          <img x-show="!open" class="inline-block size-8" src="./Assets/imgs/Icons-Logos/menuIcon.svg"
+            alt="menuIcon-bars" />
+          <img x-show="open" class="inline-block size-8" src="./Assets/imgs/Icons-Logos/closeIcon.svg"
+            alt="closeIcon" />
+        </div>
+
+        <!-- side menu in responsve mode -->
+        <ul x-show="open" x-transition x-data="{ sideItem : { superApp : false , aboutUs : false, download: false } }"
+          class="max-w-[500px] overflow-y-scroll cursor-pointer w-full h-screen lg:hidden flex flex-col bg-white text-black/60 *:p-4 absolute top-[64px] right-0 border-t">
+          <li class="flex flex-col !py-2">
+            <span @click="sideItem.superApp = !sideItem.superApp" class="flex justify-between">
+              <p class="font-bold text-black">سوپراپ اسنپ</p>
+              <img x-show="!sideItem.superApp" class=" size-4 stroke-black"
+                src="./Assets/imgs/Icons-Logos/arrowdown.svg" alt="arrowdown">
+              <img x-show="sideItem.superApp" class=" size-4 stroke-black" src="./Assets/imgs/Icons-Logos/arrowup.svg"
+                alt="arrowup">
+            </span>
+            <div class="pr-2 overflow-hidden">
+              <ul x-show="sideItem.superApp" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="-translate-y-full opacity-0 transition" x-transition:enter-end="translate-y-1"
+                x-transition:leave="transition ease-in duration-300" x-transition:leave-start="translate-y-1"
+                x-transition:leave-end="-translate-y-full opacity-0 transition"
+                class="relative pt-4 space-y-4 text-black/60">
+                <li class="">درخواست تاکسی</li>
+                <li class="">پیک موتوری</li>
+                <li class="">سفارش آنلاین غذا</li>
+                <li class="">سوپرمارکت</li>
+                <li class="">رزرو بلیط هواپیما</li>
+                <li class="">رزرو بلیط قطار</li>
+                <li class="">رزرو بلیط اتوبوس</li>
+                <li class="">رزرو هتل</li>
+                <li class="">درخواست وانت بار</li>
+                <li class="">خدمات اسباب‌کشی</li>
+                <li class="">پزشک و مشاور</li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            ثبت&zwnj;نام راننده اسنپ
+            <span class="text-green-500">(سواری، موتور و وانت)</span>
+          </li>
+          <li>باشگاه رانندگان</li>
+          <li>پنل سازمانی</li>
+          <li>بلاگ</li>
+          <li>
+            <span @click="sideItem.aboutUs = !sideItem.aboutUs" class="relative flex justify-between">
+              <p class="font-bold text-black">درباره‌ی اسنپ</p>
+              <img x-show="!sideItem.aboutUs" class=" size-4 stroke-black" src="./Assets/imgs/Icons-Logos/arrowdown.svg"
+                alt="arrowdown">
+              <img x-show="sideItem.aboutUs" class=" size-4 stroke-black" src="./Assets/imgs/Icons-Logos/arrowup.svg"
+                alt="arrowup">
+            </span>
+            <div x-show="sideItem.aboutUs" class="pr-2 overflow-hidden">
+              <ul x-show="sideItem.aboutUs" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="-translate-y-full opacity-0 transition" x-transition:enter-end="translate-y-1"
+                x-transition:leave="transition ease-in duration-300" x-transition:leave-start="translate-y-1"
+                x-transition:leave-end="-translate-y-full opacity-0 transition"
+                class="relative pt-4 space-y-4 text-black/60">
+                <li>فرصت های شغلی</li>
+                <li>درباره ما</li>
+                <li>تماس با ما</li>
+              </ul>
+            </div>
+          </li>
+          <hr class="!py-2 mx-4">
+          <li class="flex flex-col !py-0 !my-0">
+            <span @click="sideItem.download = !sideItem.download" class="relative flex justify-between">
+              <p class="font-bold text-green-500">اپلیکیشن اسنپ</p>
+              <img x-show="!sideItem.download" class=" size-4 stroke-green-500"
+                src="./Assets/imgs/Icons-Logos/arrowdown.svg" alt="arrowdown">
+              <img x-show="sideItem.download" class=" size-4 stroke-green-500"
+                src="./Assets/imgs/Icons-Logos/arrowup.svg" alt="arrowup">
+            </span>
+            <div x-show="sideItem.download" class="pr-2 overflow-y-scroll">
+              <ul x-show="sideItem.download" x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="-translate-y-full opacity-0 transition" x-transition:enter-end="translate-y-1"
+                x-transition:leave="transition ease-in duration-300" x-transition:leave-start="translate-y-1"
+                x-transition:leave-end="-translate-y-full opacity-0 transition"
+                class="relative pt-4 space-y-4 text-black/60">
+                <li>
+                  <span class="flex">
+                    <img style="padding-inline:4px ;" class="w-10 h-8"
+                      src="/Assets/imgs/Icons-Logos/directdownload-icon.png" alt="directdownload-icon">
+                    <p class="pr-1">دانلود مستقیم</p>
+                  </span>
+                </li>
+                <li>
+                  <span class="flex">
+                    <img style="padding-inline:4px ;" class="w-10 h-8" src="/Assets/imgs/Icons-Logos/cafebazaar.png"
+                      alt="cafebazaar">
+                    <p class="pr-1">دانلود از کافه‌بازار</p>
+                  </span>
+                </li>
+                <li>
+                  <span class="flex">
+                    <img style="padding-inline:4px ;" class="w-10 h-8"
+                      src="/Assets/imgs/Icons-Logos/myketmarketicon.png" alt="myketmarketicon">
+                    <p class="pr-1">دانلود از مایکت</p>
+                  </span>
+                </li>
+                <li>
+                  <span class="flex">
+                    <img style="padding-inline:4px ;" class="w-10 h-8" src="/Assets/imgs/Icons-Logos/snapp-pwa.svg"
+                      alt="snapp-pwa">
+                    <p class="pr-1">وب اپلیکیشن اسنپ (iOS)</p>
+                  </span>
+                </li>
+                <li>
+                  <span class="flex">
+                    <img style="padding-inline:4px ;" class="w-10 h-8" src="/Assets/imgs/Icons-Logos/apple.png"
+                      alt="apple">
+                    <p class="pr-1">دانلود از اپ استور</p>
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <!-- desktop navbar -->
+        <ul class="hidden text-sm text-black/60 lg:justify-start lg:flex lg:gap-x-9"
+          x-data="{ menuItems : { superApp : false , aboutUs : false } }">
+          <li @mouseenter="menuItems.superApp = true" @mouseleave="menuItems.superApp = false"
+            class="relative flex flex-col items-center cursor-default gap-x-4">
+            <span class="flex items-center gap-x-2">
+              سوپراپ اسنپ
+              <img class=" size-4 stroke-black/60" src="./Assets/imgs/Icons-Logos/arrowdown.svg" alt="arrowdown">
+            </span>
+            <ul x-show="menuItems.superApp" x-transition
+              class="absolute *:px-4 *:py-3 rounded-lg bg-white *:cursor-pointer w-44 top-8 border">
+              <li class="hover:text-snappGreen hover:font-bold">درخواست تاکسی</li>
+              <li class="hover:text-snappGreen hover:font-bold">پیک موتوری</li>
+              <li class="hover:text-snappGreen hover:font-bold">سفارش آنلاین غذا</li>
+              <li class="hover:text-snappGreen hover:font-bold">سوپرمارکت</li>
+              <li class="hover:text-snappGreen hover:font-bold">رزرو بلیط هواپیما</li>
+              <li class="hover:text-snappGreen hover:font-bold">رزرو بلیط قطار</li>
+              <li class="hover:text-snappGreen hover:font-bold">رزرو بلیط اتوبوس</li>
+              <li class="hover:text-snappGreen hover:font-bold">رزرو هتل</li>
+              <li class="hover:text-snappGreen hover:font-bold">درخواست وانت بار</li>
+              <li class="hover:text-snappGreen hover:font-bold">خدمات اسباب‌کشی</li>
+              <li class="hover:text-snappGreen hover:font-bold">پزشک و مشاور</li>
+            </ul>
+          </li>
+          <li>ثبت‌نام راننده اسنپ</li>
+          <li>باشگاه رانندگان</li>
+          <li>پنل سازمانی</li>
+          <li>بلاگ</li>
+          <li @mouseenter="menuItems.aboutUs = true" @mouseleave="menuItems.aboutUs = false"
+            class="relative flex flex-col items-center cursor-default gap-x-4">
+            <span>
+              درباره‌ی اسنپ
+              <img class="inline-block size-4 stroke-black/60" src="./Assets/imgs/Icons-Logos/arrowdown.svg"
+                alt="arrowdown">
+            </span>
+            <ul x-show="menuItems.aboutUs" x-transition
+              class="absolute *:px-4 *:py-3 rounded-lg bg-white *:cursor-pointer w-44 top-8 border">
+              <li class="hover:text-snappGreen hover:font-bold">فرصت‌های شغلی</li>
+              <li class="hover:text-snappGreen hover:font-bold">درباره ما</li>
+              <li class="hover:text-snappGreen hover:font-bold">تماس با ما</li>
+            </ul>
+
+          </li>
+        </ul>
+      </div>
+    </header>
+    <!-- overlay -->
+    <div @click="closeToggle" x-show="open" class="fixed inset-0 w-full h-screen -z-10 lg:hidden bg-black/50">
+    </div>
+  </div>
+
+  <!-- main -->
+  <main>
+    <!-- main top section -->
+    <section class="grid lg:grid-cols-2  lg:h-[400px]">
+      <div class="bg-snappGreen">
+        <div
+          class="flex flex-col xl:w-[81%] xl:mr-auto text-justify gap-y-8 px-6 xl:px-0 xl:pl-14 xl:py-5 py-4 text-white">
+          <h1 class="text-2xl font-bold tracking-tight xl:w-[455px] xl:font-extrabold xl:text-4xl/normal">
+            تجربه‌ی زندگی راحت‌تر، سریع‌تر و به‌صرفه‌تر با سوپراپلیکیشن اسنپ!
+          </h1>
+          <p class="xl:w-[450px] tracking-tighter xl:text-xl/relaxed">
+            از درخواست خودرو گرفته تا سفارش غذا، خرید سوپرمارکتی، خرید بلیط
+            سفر، رزرو هتل و... را میتوانید با اسنپ انجام دهید.
+          </p>
+          <div class="items-start hidden lg:flex gap-x-4">
+            <div class="w-[250px]">
+              <div class="relative" x-data="{ phoneNo :  '' }">
+                <input class="w-full py-2 bg-transparent border-b focus:outline-none placeholder:text-slate-300"
+                  type="text" placeholder="0912xxx6789" x-model="phoneNo" />
+                <template x-if="phoneNo !== ''">
+                  <span @click="phoneNo = ''"
+                    class="absolute flex items-center justify-center text-center rounded-full bg-slate-400 left-1 top-3 size-4">&times;</span>
+                </template>
+                <template x-if="phoneNo === ''">
+                  <span class="absolute bg-white rounded-full left-1 top-4 size-2"></span>
+                </template>
+              </div>
+              <button class="block rounded-lg px-4 py-2 w-full border mt-8 font-bold text-lg hover:bg-[#38b369]">
+                ورود به وب اپلیکیشن اسنپ
+              </button>
+            </div>
+            <button class="text-snappGreen text-sm font-bold bg-white rounded-md px-6 py-2.5">
+              ارسال لینک
+            </button>
+          </div>
+          <button class="block w-full p-4 mt-4 text-sm font-bold text-black bg-white border rounded-lg lg:hidden">
+            دانلود اپلیکیشن اسنپ
+          </button>
+        </div>
+      </div>
+      <div class="hidden bg-cover scale-x-1 bg-snappGuy lg:block">
+      </div>
+    </section>
+    <!-- download badges -->
+    <section class="flex-wrap justify-center hidden my-20 md:flex gap-x-12 gap-y-8">
+      <img class="w-40 h-12" src="./Assets/imgs/DownloadBadges/direct-download-badge.png" alt="direct-download-badge" />
+      <img class="w-40 h-12" src="./Assets/imgs/DownloadBadges/bazaar.png" alt="bazaar" />
+      <img class="w-40 h-12" src="./Assets/imgs/DownloadBadges/myketmarket.png" alt="myketmarket" />
+      <img class="w-40 h-12" src="./Assets/imgs/DownloadBadges/snapp-pwa.png" alt="snapp-pwa" />
+      <img class="w-40 h-12" src="./Assets/imgs/DownloadBadges/app_store.svg" alt="app_store" />
+    </section>
+    <!-- services section -->
+    <section x-data="needsSect" class="py-16 xl:mt-16 lg:px-16 md:px-12 bg-snappGray">
+      <h2 class="text-2xl font-bold text-center lg:text-3xl xl:text-4xl text-snappBlack">یک اپلیکیشن، برای تمام نیاز ها
+      </h2>
+      <div class="flex flex-col gap-6 px-16 my-10 vsm:grid-cols-3 vsm:grid">
+        <template x-for="need in needs">
+          <div
+            class="flex flex-col items-center justify-center p-5 text-center bg-white md:p-2 lg:p-5 gap-x-2 rounded-xl xl:flex-row xl:text-start xl:justify-start">
+            <img class="size-16" :src="need.img" alt="servicePicture">
+            <div class="mt-2 xl:space-y-2 lg:mt-0">
+              <p x-text="need.title" class="font-bold text-snappBlack"></p>
+              <span x-text="need.subtitle" class="hidden font-extralight text-snappWhite lg:block"></span>
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
+    <!-- slider -->
+    <section style="direction: ltr;"
+        class="md:size-[80%] size-[90%] relative my-8 overflow-hidden mx-auto rounded-md"
+        x-data="swiperComponent()"
+        x-init="init()"
+      >
+        <div class="relative swiper-container">
+          <!-- Additional required wrapper -->
+          <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+              <img src="./Assets/imgs/Pictures/Market.jpg" alt="Market" />
+            </div>
+            <div class="swiper-slide">
+              <img src="./Assets/imgs/Pictures/Food.jpg" alt="Food" />
+            </div>
+            <div class="swiper-slide">
+              <img src="./Assets/imgs/Pictures/Driver.jpg" alt="Driver" />
+            </div>
+            <div class="swiper-slide">
+              <img src="./Assets/imgs/Pictures/Club.jpg" alt="Club" />
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </section>
+    <!-- about -->
+    <section class="flex flex-col items-center lg:flex-row justify-center gap-x-14 lg:mb-[-4rem]">
+      <div class="bg-cover bg-center w-full h-48 bg-superApp lg:w-[670px] lg:h-[450px] lg:flex-2"></div>
+      <div class="flex-1 px-4 my-8 lg:px-0">
+        <h2 class="text-2xl font-bold text-snappBlack">سوپر اپ اسنپ؛ پاسخی به تمام نیازها</h2>
+        <p class="mt-8 lg:ml-5 text-justify font-light lg:w-[500px] text-sm/6">اسنپ، اولین تاکسی اینترنتی ایران، بعد از
+          پنج
+          سال فعالیت در حوزه‌ی تردد شهری، به یک سوپر‌اپ با خدمات متنوع
+          تبدیل شد. سوپراپ اسنپ راه‌حلی جدید و ساده است که با استفاده از آن تنها با یک اپلیکیشن می‌توانید علاوه بر
+          درخواست خودرو، موتور و وانت از خدمات متعددی از جمله سفارش غذا، پزشک و مشاور آنلاین، خرید از سوپرمارکت‌ها و
+          فروشگاه‌ها، اسباب‌کشی، خرید بلیط (هواپیما، اتوبوس، قطار)، رزرو هتل، پرداخت قبض و خرید شارژ استفاده کنید.</p>
+      </div>
+    </section>
+    <!-- properties -->
+    <section x-data="propertiesSect"
+      class="flex flex-col flex-wrap items-center justify-center w-full gap-12 px-8 mb-16 vsm:flex-row sm:px-0 ">
+      <template x-for="property in properties">
+        <div class="sm:w-[17rem] h-[20rem]">
+          <div class=" bg-snappGray rounded-xl">
+            <img class="m-auto" :src="property.img" :alt="property.alt">
+          </div>
+          <h3 x-text="property.title" class="my-6 text-xl font-bold"></h3>
+          <p x-text="property.text" class="font-light text-justify text-sm/6"></p>
+        </div>
+      </template>
+
+    </section>
+    <!-- register -->
+    <section class="px-8 py-16 bg-snappGray">
+      <div class="flex flex-col items-center justify-center">
+        <h2 class="pb-4 text-4xl font-bold text-center leading-[3rem] text-snappBlack">در کمتر از ۱۰ دقیقه ثبت‌نام کنید
+          و به ناوگان اسنپ بپیوندید.</h2>
+        <p class="py-1 text-xl leading-10 text-center text-snappBlack/70">
+          بدون نیاز به مراجعه‌ی حضوری، از طریق این صفحه،
+          تمام مراحل ثبت‌نام را اینترنتی انجام دهید
+        </p>
+        <button
+          class="bg-[#00d170] text-lg font-bold text-white rounded-md px-8 py-2.5 my-4 hover:bg-[#00db75] transition-colors">
+          ثبت‌نام رانندگان
+        </button>
+      </div>
+      <div x-data="snappFleet" class="xl:w-[1060px] mx-auto px-8 overflow-hidden z-40">
+        <video class="w-full lg:h-[600px] m-auto rounded-2xl overflow-hidden my-6" src="./Assets/video/jazbranandeh.mp4"
+          controls></video>
+        <div class="grid gap-6 mt-12 lg:grid-cols-2">
+          <template x-for="item in items">
+            <div class="flex flex-col items-center p-8 bg-white lg:flex-row gap-y-4 lg:gap-y-0 gap-x-2 rounded-2xl">
+              <img :src="item.img" :alt="item.alt">
+              <div>
+                <h3 x-text="item.title" class="font-bold text-snappBlack"></h3>
+                <p x-text="item.text" class="font-light text-justify text-sm/6">
+                </p>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- footer -->
+  <footer class="pt-10 pb-5 px-14">
+    <ul class="flex flex-wrap justify-center gap-x-4 gap-y-4 text-slate-500">
+      <li>فرصت های شغلی</li>
+      <li>بلاگ</li>
+      <li>شرایط و قوانین</li>
+      <li>پنل سازمانی</li>
+      <li>سوالات متداول</li>
+      <li>باشگاه رانندگان</li>
+      <li>ثبت&zwnj;نام اسنپ</li>
+      <li>درباره&zwnj;ی ما</li>
+      <li>تماس با ما</li>
+    </ul>
+    <div class="flex justify-center py-4 mx-auto cursor-pointer gap-x-2">
+      <img src="./Assets/imgs/Icons-Logos/twitter.svg" alt="twitter">
+      <img src="./Assets/imgs/Icons-Logos/insta.svg" alt="insta">
+      <img class="size-9" src="./Assets/imgs/Icons-Logos/youtube.svg" alt="youtube">
+      <img src="./Assets/imgs/Icons-Logos/linkdin.svg" alt="linkdin">
+      <img src="./Assets/imgs/Icons-Logos/telegram.svg" alt="telegram">
+    </div>
+    <div class="flex flex-wrap justify-center gap-y-4">
+      <img src="./Assets/imgs/Pictures/logo.png" alt="samandehi.ir-logo">
+      <img class="size-40" src="./Assets/imgs/Pictures/namad.png" alt="e-namad">
+    </div>
+    <hr class="pb-5 mt-4">
+    <p class="text-xs text-left text-slate-500">
+      Designed by LilArash, my <a class="transition-colors hover:text-orange-400" target="_blank"
+        href="https://github.com/LilArash">github link.</a>
+      Original site: <a class="transition-colors hover:text-snappGreen" target="_blank"
+        href="https://snapp.ir">snapp.ir</a>
+    </p>
+  </footer>
+  <script>
+    document.addEventListener("alpine:init", () => {
+      Alpine.data("dropdown", () => ({
+        open: false,
+        closeToggle() {
+          this.open = false;
+          document.body.classList.remove("overflow-hidden");
+        },
+        //remove scroll bar
+        toggle() {
+          this.open = !this.open;
+          if (this.open) document.body.classList.add("overflow-hidden");
+          if (!this.open) document.body.classList.remove("overflow-hidden");
+        },
+      }));
+      //using these objects to create some elements with loop
+      //ُservice section objects
+      Alpine.data("needsSect", () => (
+        {
+          needs: [
+            {
+              title: "تاکسی اینترنتی",
+              subtitle: "امکان درخواست آنلاین خودرو با اسنپ",
+              img: "./Assets/imgs/Services/taxi.svg"
+            },
+            {
+              title: "پیک موتوری",
+              subtitle: "حمل و نقل با اسنپ",
+              img: "./Assets/imgs/Services/bike.svg"
+            },
+            {
+              title: "سوپر مارکت آنلاین",
+              subtitle: "تهیه‌ی اقلام روزانه با اسنپ",
+              img: "./Assets/imgs/Services/spdiscount.png"
+            },
+            {
+              title: "سفارش آنلاین غذا",
+              subtitle: "سفارش غذا، نان و شیرینی با اسنپ",
+              img: "./Assets/imgs/Services/food.svg"
+            },
+            {
+              title: "درخواست وانت",
+              subtitle: "حمل و نقل با اسنپ",
+              img: "./Assets/imgs/Services/pickup.svg"
+            },
+            {
+              title: "اسنپ اکسپرس",
+              subtitle: "تحویل کمتر از 30 دقیقه",
+              img: "./Assets/imgs/Services/spdiscount.png"
+            },
+            {
+              title: "بلیط پرواز داخلی",
+              subtitle: "گردشگری با اسنپ",
+              img: "./Assets/imgs/Services/fdom-t.png"
+            },
+            {
+              title: "بلیط پرواز خارجی",
+              subtitle: "گردشگری با اسنپ",
+              img: "./Assets/imgs/Services/intflight.svg"
+            },
+            {
+              title: "بیمه",
+              subtitle: "خرید آنلاین بیمه بااسنپ",
+              img: "./Assets/imgs/Services/insdiscount.png"
+            },
+            {
+              title: "رزرو هتل",
+              subtitle: "گردشگری با اسنپ",
+              img: "./Assets/imgs/Services/hotel.svg"
+            },
+            {
+              title: "رزرو اقامتگاه",
+              subtitle: "گردشگری با اسنپ",
+              img: "./Assets/imgs/Services/hotel.svg"
+            },
+            {
+              title: "پزشک و مشاور",
+              subtitle: "درمان با اسنپ",
+              img: "./Assets/imgs/Services/doctor.svg"
+            },
+            {
+              title: "بلیط اتوبوس",
+              subtitle: "گردشگری با اسنپ",
+              img: "./Assets/imgs/Services/bus.svg"
+            },
+            {
+              title: "بلیط قطار",
+              subtitle: "گردشگری با اسنپ",
+              img: "./Assets/imgs/Services/train.svg"
+            },
+            {
+              title: "داروخانه",
+              subtitle: "داروخانه‌ی آنلاین اسنپ",
+              img: "./Assets/imgs/Services/pharmacy.svg"
+            },
+            {
+              title: "اسباب کشی منزل",
+              subtitle: "حمل و نقل با اسنپ",
+              img: "./Assets/imgs/Services/moving.svg"
+            },
+            {
+              title: "ثبت‌نام راننده",
+              subtitle: "ثبت‌نام تاکسی اینترنتی اسنپ",
+              img: "./Assets/imgs/Services/driver.svg"
+            },
+            {
+              title: "فروشگاه",
+              subtitle: "خرید از فروشگاه‌های معتبر شهر",
+              img: "./Assets/imgs/Services/shop.svg"
+            },
+            {
+              title: "سرمایه گذاری",
+              subtitle: "خدمات غیرحضوری بورس و سرمایه گذاری",
+              img: "./Assets/imgs/Services/investment.svg"
+            },
+            {
+              title: "سرویس اعتباری",
+              subtitle: "پرداخت با اسنپ",
+              img: "./Assets/imgs/Services/Credit.svg"
+            },
+            {
+              title: "اسنپ! کلاب",
+              subtitle: "باشگاه مشتریان اسنپ",
+              img: "./Assets/imgs/Services/club.svg"
+            },
+
+
+          ]
+        }
+      ));
+      //properties section objects
+      Alpine.data("propertiesSect", () => (
+        {
+          properties: [
+            {
+              title: "آسان",
+              text: "برای استفاده از هر کدام از خدمات سوپر‌اپ اسنپ کافی است وارد اپلیکیشن اسنپ شوید و روی آیکون مورد نظر بزنید.",
+              img: "./Assets/imgs/Pictures/easy.png",
+              alt: "easy"
+            },
+            {
+              title: "سریع",
+              text: "قرار گرفتن خدمات مختلف در یک پلت‌فرم به صرفه‌جویی در زمان کمک می‌کند. سوپراپ اسنپ پاسخی سریع به نیازهای رومزه‌ی شماست.",
+              img: "./Assets/imgs/Pictures/fast.png",
+              alt: "fast"
+            },
+            {
+              title: "به صرفه",
+              text: "سوپراپ اسنپ علاوه بر زمان در هزینه‌های شما نیز صرفه‌جویی می‌کند تا بهترین خدمات را با قیمتی منطقی دریافت کنید.",
+              img: "./Assets/imgs/Pictures/eco.png",
+              alt: "economic"
+            },
+          ]
+        }
+      )
+      )
+      //fleet section objects
+      Alpine.data("snappFleet", () => (
+        {
+          items: [
+            {
+              title: " درآمد تضمینی + پاداش‌های ماهانه و هفتگی",
+              text: "با فعالیت در ناوگان اسنپ، علاوه بر کسب درآمد مستمر و امکان تسویه در لحظه می‌توانید با شرکت در طرح‌های تشویقی مختلف، درآمد خود را افزایش دهید.",
+              img: "./Assets/imgs/Pictures/income.png",
+              alt: "income"
+            },
+            {
+              title: "ساعت کاری دلخواه",
+              text: "فعالیت در ناوگان اسنپ محدودیت زمانی ندارد و می‌توانید فعالیت خود را در هر ساعت از شبانه‌روز و متناسب با برنامه‌ی زندگی‌تان شخصی‌سازی کنید.",
+              img: "./Assets/imgs/Pictures/hour.png",
+              alt: "hour"
+            },
+            {
+              title: "مزایا و خدمات باشگاه رانندگان",
+              text: "در باشگاه رانندگان اسنپ می‌توانید از تسهیلات و خدمات متنوعی از جمله خدمات خودرویی، خدمات درمانی و همچنین خدمات رفاهی و آموزشی بهره‌مند شوید.",
+              img: "./Assets/imgs/Pictures/benefits.png",
+              alt: "benefits"
+            },
+            {
+              title: "کار‌فیکس",
+              text: "باشگاه رانندگان اسنپ به‌تازگی سرویس جدید «اسنپ کارفیکس» را برای سهولت دسترسی کاربران راننده به انواع خدمات خودرویی راه‌اندازی کرده است.",
+              img: "./Assets/imgs/Pictures/carfix.png",
+              alt: "carfix"
+            },
+          ]
+
+        }
+      ))
+    });
+
+  </script>
+ <script>
+  function swiperComponent() {
+    return {
+      swiper: null,
+      init() {
+        this.swiper = new Swiper(".swiper-container", {
+          loop: true,
+          //direction: 'vertical',
+          spaceBetween: 10,
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+          on: {
+            slideChange: function () {
+              this.pagination.enable();
+            },
+          },
+        });
+      },
+    };
+  }
+</script>
+</body>
+
+
+</html>
