@@ -2124,11 +2124,11 @@ body {
 }
 
 .bg-snappGuy {
-  background-image: url('/Assets/imgs/Pictures/mainTopImg.jpg');
+  background-image: url('../imgs/Pictures/mainTopImg.jpg');
 }
 
 .bg-superApp {
-  background-image: url(/Assets/imgs/Pictures/superapp.jpg);
+  background-image: url('../imgs/Pictures/superapp.jpg');
 }
 
 .decoration-slice {
